@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-
 public class Cell : MonoBehaviour, IPointerClickHandler
 {
     public bool isOccupied;
@@ -41,13 +40,55 @@ public class Cell : MonoBehaviour, IPointerClickHandler
 
         PlantData data = manager.SelectedPlant;
 
+        // CHECK SUN MANAGER
+        if (SunManager.Instance == null) return;
+
+        // CHECK TIỀN
+        if (!SunManager.Instance.CanAfford(data.cost))
+        {
+            Debug.Log("Not enough sun!");
+            return;
+        }
+
+        // TRỪ TIỀN
+        SunManager.Instance.SpendSun(data.cost);
+        PlantCardUI[] cards = FindObjectsByType<PlantCardUI>(FindObjectsSortMode.None);
+
+        foreach (PlantCardUI card in cards)
+        {
+            if (card != null && card.GetPlantData() == data)
+            {
+                card.StartCooldown();
+            }
+        }
+
+
+
+        // SPAWN CÂY
+        // SPAWN CÂY
         currentPlant = Instantiate(
             data.plantPrefab,
             transform.position,
             Quaternion.identity
         );
 
+        // INIT HEALTH
+        PlantHealth health = currentPlant.GetComponent<PlantHealth>();
+        if (health != null)
+        {
+            health.Init(data);
+        }
+
+        // INIT ATTACK
+        PlantAttack attack = currentPlant.GetComponent<PlantAttack>();
+        if (attack != null)
+        {
+            attack.Init(data);
+        }
+
         isOccupied = true;
+
+
         manager.ClearSelectedPlant();
         PlantPreviewController.Instance.ClearPreview();
     }

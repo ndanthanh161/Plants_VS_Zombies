@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7268c9b4d7222543a1609db7b031c4b, type: 3}
+  m_Name: FireWood
+  m_EditorClassIdentifier: Assembly-CSharp::PlantData
+  previewPrefab: {fileID: 7348742598919116380, guid: e50ea561fb7af014e99dc5842f530f53, type: 3}
+  plantName: FireWood
+  icon: {fileID: -3914404500002775089, guid: c5b5b5060db089348901b536c548f04d, type: 3}
+  cost: 75
+  cooldown: 5
+  plantPrefab: {fileID: 6030576142770589455, guid: c03a905a08efa1d4aa26c6e31c73a9d7, type: 3}
+  maxHP: 100
+  damage: 0
+  attackInterval: 0

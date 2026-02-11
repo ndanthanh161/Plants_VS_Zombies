@@ -41,6 +41,10 @@ public class ShovelManager : MonoBehaviour
     {
         IsShovelActive = true;
 
+        // 🔥 ẨN CHUỘT
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+
         if (currentPreview == null)
         {
             currentPreview = Instantiate(shovelPreviewPrefab);
@@ -52,6 +56,10 @@ public class ShovelManager : MonoBehaviour
     public void DeactivateShovel()
     {
         IsShovelActive = false;
+
+        // 🔥 HIỆN LẠI CHUỘT
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         if (currentPreview != null)
         {

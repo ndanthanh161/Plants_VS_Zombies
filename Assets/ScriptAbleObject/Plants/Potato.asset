@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7268c9b4d7222543a1609db7b031c4b, type: 3}
+  m_Name: Potato
+  m_EditorClassIdentifier: Assembly-CSharp::PlantData
+  previewPrefab: {fileID: 6603348078394196463, guid: 820ad38e07c0c0d4eb27313e066d2508, type: 3}
+  plantName: Potato
+  icon: {fileID: 3572808643185077521, guid: 07f9f2e6d45b52f4aa9ab3c73ccd3de1, type: 3}
+  cost: 50
+  cooldown: 5
+  plantPrefab: {fileID: 1977535409456385772, guid: a7a860a005e81fc47801a8a2cae97ab7, type: 3}
+  maxHP: 100
+  damage: 0
+  attackInterval: 0

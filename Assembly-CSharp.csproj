@@ -61,13 +61,32 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.2f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\PlanCard\PlantData.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieHealth.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieSpawnerPvZ.cs" />
+    <Compile Include="Assets\Scripts\PlantCard\PlantAttack.cs" />
     <Compile Include="Assets\Scripts\Grid\Cell.cs" />
+    <Compile Include="Assets\Scripts\SunPoint\SunSpawner.cs" />
+    <Compile Include="Assets\Scripts\PlantCard\PlantHealth.cs" />
+    <Compile Include="Assets\Scripts\PlantCard\PlantCardUI.cs" />
     <Compile Include="Assets\Scripts\Shovel\ShovelManager.cs" />
-    <Compile Include="Assets\Scripts\PlanCard\PlantCardManager.cs" />
+    <Compile Include="Assets\Scripts\SunPoint\SunManager.cs" />
+    <Compile Include="Assets\Scripts\PlantCard\Plant.cs" />
+    <Compile Include="Assets\Scripts\PlantCard\PlantData.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieAttack.cs" />
+    <Compile Include="Assets\Scripts\LaneContainer\Lane.cs" />
+    <Compile Include="Assets\Scripts\LaneContainer\LaneManager.cs" />
+    <Compile Include="Assets\Scripts\PlantCard\PlantCardManager.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieVisual.cs" />
     <Compile Include="Assets\Scripts\PreviewPlant\PlantPreviewController.cs" />
-    <Compile Include="Assets\Scripts\PlanCard\PlantCardUI.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieController.cs" />
+    <Compile Include="Assets\Scripts\SunPoint\SunFlower.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieMovement.cs" />
+    <Compile Include="Assets\Scripts\SunPoint\Sun.cs" />
+    <Compile Include="Assets\Scripts\PlantBullet\Pea.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieData.cs" />
+    <Compile Include="Assets\Scripts\Zombies\LevelWaveData.cs" />
     <Compile Include="Assets\Scripts\Grid\GridManager.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieWave.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

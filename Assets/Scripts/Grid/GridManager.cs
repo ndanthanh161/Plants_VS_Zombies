@@ -4,9 +4,9 @@ public class GridManager : MonoBehaviour
 {
     public int rows = 5;
     public int columns = 9;
-    public float cellWidth = 1.8f;
-    public float cellHeight = 2f;
-    public Vector2 startPosition = new Vector2(-7.2f, 4f);
+    public float cellWidth = 1.33f;
+    public float cellHeight = 1.46f;
+    public Vector2 startPosition = new Vector2(-2.9f, 2.1f);
 
     public GameObject cellPrefab;
 
