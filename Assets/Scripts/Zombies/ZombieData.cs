@@ -10,6 +10,8 @@ public class ZombieData : ScriptableObject
     [Header("Attack")]
     public int damage;
     public float attackInterval;
+    [Header("Score")]
+    public int scoreValue = 100;
 
     [Header("Visual")]
     public GameObject visualPrefab;

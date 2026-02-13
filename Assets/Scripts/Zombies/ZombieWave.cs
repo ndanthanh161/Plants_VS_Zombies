@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 [System.Serializable]
 public class ZombieSpawnChance
 {
@@ -7,11 +8,11 @@ public class ZombieSpawnChance
     public int weight;
 }
 
-
 [System.Serializable]
 public class ZombieWave
 {
-    public float duration = 20f;
+    public int zombieCount = 10;
+
     public float spawnInterval = 3f;
     public float intervalRandomOffset = 1f;
 

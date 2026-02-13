@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ZombieWaveSpawner : MonoBehaviour
 {
@@ -9,37 +8,133 @@ public class ZombieWaveSpawner : MonoBehaviour
     public float zombieSpawnX = 10f;
 
     int currentWaveIndex;
-    float waveTimer;
     float spawnTimer;
+    float currentSpawnInterval;
 
-    List<int> availableLanes = new List<int>();
+    int spawnedInWave;
+    int aliveZombies;
+
 
     void Start()
     {
-        InitLanes();
+        CalculateNextInterval();
     }
 
     void Update()
     {
+        if (levelData == null || laneManager == null)
+            return;
+
         if (currentWaveIndex >= levelData.waves.Length)
             return;
 
         ZombieWave wave = levelData.waves[currentWaveIndex];
 
-        waveTimer += Time.deltaTime;
         spawnTimer += Time.deltaTime;
 
-        float realInterval =
-            wave.spawnInterval +
+        if (spawnTimer >= currentSpawnInterval && spawnedInWave < wave.zombieCount)
+        {
+            int spawnAmount = GetSpawnAmount(wave);
+
+            for (int i = 0; i < spawnAmount; i++)
+            {
+                if (spawnedInWave < wave.zombieCount)
+                    SpawnZombie(wave);
+            }
+
+            spawnTimer = 0f;
+            CalculateNextInterval();
+        }
+    }
+
+    void CalculateNextInterval()
+    {
+        ZombieWave wave = levelData.waves[currentWaveIndex];
+
+        float progress = (float)spawnedInWave / wave.zombieCount;
+
+        float curve = progress * progress;
+
+        float dynamicInterval = Mathf.Lerp(
+            wave.spawnInterval,
+            wave.spawnInterval * 0.3f,
+            curve
+        );
+
+        currentSpawnInterval =
+            dynamicInterval +
             Random.Range(-wave.intervalRandomOffset, wave.intervalRandomOffset);
 
-        if (spawnTimer >= realInterval)
-        {
-            SpawnZombie(wave);
-            spawnTimer = 0f;
-        }
+        if (currentSpawnInterval < 0.2f)
+            currentSpawnInterval = 0.2f;
+    }
 
-        if (waveTimer >= wave.duration)
+    int GetSpawnAmount(ZombieWave wave)
+    {
+        float progress = (float)spawnedInWave / wave.zombieCount;
+
+        if (wave.isHugeWave)
+            return Random.Range(2, 4);
+
+        if (progress > 0.75f)
+            return Random.Range(2, 4);
+
+        if (progress > 0.4f)
+            return Random.value < 0.4f ? 2 : 1;
+
+        return 1;
+    }
+
+    void SpawnZombie(ZombieWave wave)
+    {
+        int laneCount = laneManager.grid.rows;
+
+        int laneIndex = Random.Range(0, laneCount);
+
+        float yPos = laneManager.grid.startPosition.y
+                     - laneIndex * laneManager.grid.cellHeight;
+
+        ZombieData data = GetRandomZombieByWeight(wave.zombieChances);
+
+        Vector3 pos = new Vector3(zombieSpawnX, yPos, 0);
+
+        GameObject zombie = Instantiate(
+            zombiePrefab,
+            pos,
+            Quaternion.identity,
+            transform
+        );
+
+        ZombieController controller = zombie.GetComponent<ZombieController>();
+        if (controller != null)
+            controller.Init(data, laneIndex);
+
+        ZombieHealth health = zombie.GetComponent<ZombieHealth>();
+        if (health != null)
+            health.OnDeath += OnZombieKilled;
+
+        spawnedInWave++;
+        aliveZombies++;
+    }
+
+
+
+    void OnZombieKilled(ZombieHealth health)
+    {
+        aliveZombies--;
+
+        if (health != null)
+        {
+            health.OnDeath -= OnZombieKilled;
+
+            GameManager.Instance.AddScore(health.ScoreValue);
+        }
+        if (currentWaveIndex >= levelData.waves.Length)
+            return;
+
+        ZombieWave wave = levelData.waves[currentWaveIndex];
+
+        if (spawnedInWave >= wave.zombieCount && aliveZombies <= 0)
         {
             NextWave();
         }
@@ -48,68 +143,26 @@ public class ZombieWaveSpawner : MonoBehaviour
     void NextWave()
     {
         currentWaveIndex++;
-        waveTimer = 0f;
+
+        if (currentWaveIndex >= levelData.waves.Length)
+        {
+            Debug.Log("YOU WIN");
+
+            GameManager.Instance.WinGame();   // 🔥 thêm cái này
+            LevelProgressManager.UnlockNextLevel(1);
+
+            return; // 🛑 QUAN TRỌNG: dừng tại đây
+        }
+
+        spawnedInWave = 0;
+        aliveZombies = 0;
         spawnTimer = 0f;
 
-        Debug.Log(
-            currentWaveIndex < levelData.waves.Length
-            ? $"Wave {currentWaveIndex + 1} start"
-            : "All waves completed"
-        );
+        CalculateNextInterval();
+
+        Debug.Log("Wave " + (currentWaveIndex + 1) + " Start");
     }
 
-    void InitLanes()
-    {
-        availableLanes.Clear();
-
-        if (laneManager == null) return;
-
-        for (int i = 0; i < laneManager.transform.childCount; i++)
-            availableLanes.Add(i);
-    }
-
-    void SpawnZombie(ZombieWave wave)
-    {
-        if (availableLanes.Count == 0)
-            InitLanes();
-
-        int laneIndex = availableLanes[Random.Range(0, availableLanes.Count)];
-        availableLanes.Remove(laneIndex);
-
-        Transform lane = laneManager.transform.GetChild(laneIndex);
-
-        ZombieData data = GetRandomZombieByWeight(wave.zombieChances);
-
-        Vector3 pos = new Vector3(zombieSpawnX, lane.position.y, 0);
-
-        GameObject zombie = Instantiate(zombiePrefab, pos, Quaternion.identity, transform);
-
-        ZombieController controller = zombie.GetComponent<ZombieController>();
-        if (controller != null)
-            controller.Init(data);
-
-        if (wave.isHugeWave)
-            SpawnExtraZombie(wave, laneIndex);
-    }
-
-    void SpawnExtraZombie(ZombieWave wave, int laneIndex)
-    {
-        Transform lane = laneManager.transform.GetChild(laneIndex);
-
-        ZombieData data = GetRandomZombieByWeight(wave.zombieChances);
-
-        Vector3 pos = new Vector3(
-            zombieSpawnX + Random.Range(0.5f, 1.5f),
-            lane.position.y,
-            0
-        );
-
-        GameObject zombie = Instantiate(zombiePrefab, pos, Quaternion.identity, transform);
-
-        ZombieController controller = zombie.GetComponent<ZombieController>();
-        if (controller != null)
-            controller.Init(data);
-    }
 
     ZombieData GetRandomZombieByWeight(ZombieSpawnChance[] chances)
     {

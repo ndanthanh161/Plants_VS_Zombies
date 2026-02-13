@@ -171,3 +171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pea
   speed: 8
   lifeTime: 5
+  fireMultiplier: 2
+  normalSprite: {fileID: 4054616254958905111, guid: 032fe8d3c66ee0a4aaeef453eab9c80b, type: 3}
+  fireSprite: {fileID: 3310002292416464744, guid: 38aa7f3ca597142468f57f5ba2a9161c, type: 3}

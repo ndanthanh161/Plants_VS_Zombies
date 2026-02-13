@@ -51,7 +51,8 @@ public class ZombieAttack : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Plant")) return;
+        if (!other.CompareTag("Plant") && !other.CompareTag("Torch"))
+            return;
 
         Plant plant = other.GetComponent<Plant>();
         if (plant == null) return;
@@ -63,7 +64,8 @@ public class ZombieAttack : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("Plant")) return;
+        if (!other.CompareTag("Plant") && !other.CompareTag("Torch"))
+            return;
 
         if (other.GetComponent<Plant>() == target)
         {

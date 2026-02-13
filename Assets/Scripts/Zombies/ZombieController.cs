@@ -3,6 +3,7 @@ using UnityEngine;
 public class ZombieController : MonoBehaviour
 {
     public ZombieData data;
+    public int rowIndex;
 
     ZombieMovement movement;
     ZombieAttack attack;
@@ -17,9 +18,10 @@ public class ZombieController : MonoBehaviour
         health = GetComponent<ZombieHealth>();
     }
 
-    public void Init(ZombieData zombieData)
+    public void Init(ZombieData zombieData, int laneIndex)
     {
         data = zombieData;
+        rowIndex = laneIndex;
 
         if (movement != null)
             movement.Init(data);

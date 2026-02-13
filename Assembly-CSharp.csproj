@@ -62,12 +62,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Zombies\ZombieHealth.cs" />
+    <Compile Include="Assets\Scripts\GameController\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GameController\MainMenuManager.cs" />
+    <Compile Include="Assets\Scripts\GameController\UIManager.cs" />
     <Compile Include="Assets\Scripts\Zombies\ZombieSpawnerPvZ.cs" />
     <Compile Include="Assets\Scripts\PlantCard\PlantAttack.cs" />
     <Compile Include="Assets\Scripts\Grid\Cell.cs" />
     <Compile Include="Assets\Scripts\SunPoint\SunSpawner.cs" />
     <Compile Include="Assets\Scripts\PlantCard\PlantHealth.cs" />
+    <Compile Include="Assets\Scripts\GameController\LevelProgressManager.cs" />
     <Compile Include="Assets\Scripts\PlantCard\PlantCardUI.cs" />
+    <Compile Include="Assets\Scripts\LaneContainer\LawnMower.cs" />
     <Compile Include="Assets\Scripts\Shovel\ShovelManager.cs" />
     <Compile Include="Assets\Scripts\SunPoint\SunManager.cs" />
     <Compile Include="Assets\Scripts\PlantCard\Plant.cs" />
@@ -83,9 +88,11 @@
     <Compile Include="Assets\Scripts\Zombies\ZombieMovement.cs" />
     <Compile Include="Assets\Scripts\SunPoint\Sun.cs" />
     <Compile Include="Assets\Scripts\PlantBullet\Pea.cs" />
+    <Compile Include="Assets\Scripts\LaneContainer\LoseZone.cs" />
     <Compile Include="Assets\Scripts\Zombies\ZombieData.cs" />
     <Compile Include="Assets\Scripts\Zombies\LevelWaveData.cs" />
     <Compile Include="Assets\Scripts\Grid\GridManager.cs" />
+    <Compile Include="Assets\Scripts\Zombies\ZombieScore.cs" />
     <Compile Include="Assets\Scripts\Zombies\ZombieWave.cs" />
   </ItemGroup>
   <ItemGroup>
