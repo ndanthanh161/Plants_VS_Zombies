@@ -4,6 +4,12 @@ public class ZombieMovement : MonoBehaviour
 {
     float moveSpeed;
     bool isEating;
+    ZombieVisual visual;
+
+    void Awake()
+    {
+        visual = GetComponent<ZombieVisual>();
+    }
 
     public void Init(ZombieData data)
     {
@@ -19,5 +25,11 @@ public class ZombieMovement : MonoBehaviour
     public void SetEating(bool value)
     {
         isEating = value;
+        
+        // Gọi animation khi chuyển trạng thái Ăn/Đi bộ
+        if (visual != null && visual.Anim != null)
+        {
+            visual.Anim.SetBool("IsEating", value);
+        }
     }
 }

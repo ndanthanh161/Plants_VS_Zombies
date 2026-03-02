@@ -839,6 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SunManager
   currentSun: 200
   sunText: {fileID: 1158856258}
+  sunPickupSound: {fileID: 8300000, guid: 4c38ef3359d64094589e106ffcec1881, type: 3}
 --- !u!4 &547302928
 Transform:
   m_ObjectHideFlags: 0
@@ -1176,6 +1177,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4330be1d1e5ee2a459d696fef648fad1, type: 2}
   - {fileID: 11400000, guid: 76d13155a2e29aa4099421327ea2066b, type: 2}
   - {fileID: 11400000, guid: 4f4fe3a1abf55e94ab0112094f772289, type: 2}
+  - {fileID: 11400000, guid: 9fece431e64432e458ecd4eb05a89e97, type: 2}
   cardParent: {fileID: 1430696003}
   cardPrefab: {fileID: 4040284712739485874, guid: c1852c2cfd4a1ec459b060072f6790c0, type: 3}
   startX: 150
@@ -1980,6 +1982,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0c062e37356c84f972a6909dd62b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  backgroundMusic: {fileID: 8300000, guid: b3c7dfc23ea23a0469d3b18b988dd943, type: 3}
+  loseSound: {fileID: 8300000, guid: 9fe951597797db540bc0f6cecaea278d, type: 3}
+  winSound: {fileID: 8300000, guid: 6db07ad5c6ff1c240ab87a3d78275497, type: 3}
 --- !u!4 &1283590623
 Transform:
   m_ObjectHideFlags: 0
@@ -2301,6 +2306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShovelManager
   shovelPreviewPrefab: {fileID: 4319941981357232807, guid: 112a03dc2b070f8449d9f8de1d020f6c, type: 3}
+  shovelSound: {fileID: 8300000, guid: d797ff251c1984b45bb3f99b2534452a, type: 3}
 --- !u!114 &1446305760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2582,6 +2588,7 @@ MonoBehaviour:
   cellHeight: 1.46
   startPosition: {x: -2.9, y: 2.1}
   cellPrefab: {fileID: 8877362165210806649, guid: 47a9ffd8236fe8e42b8f6dab6714445e, type: 3}
+  plantSound: {fileID: 8300000, guid: e4d1db8f9f16432448a2ec30ffcf5493, type: 3}
 --- !u!1 &1951447544
 GameObject:
   m_ObjectHideFlags: 0

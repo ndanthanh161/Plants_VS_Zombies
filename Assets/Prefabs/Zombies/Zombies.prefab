@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZombieController
   data: {fileID: 0}
+  rowIndex: 0
 --- !u!114 &2649464019555484818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247e67d26f145e4584ce301e6cef508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZombieAttack
+  eatSound: {fileID: 8300000, guid: a82cee96f0f212d4883df384efdb254e, type: 3}
+  eatSoundInterval: 2
 --- !u!114 &5181005594083794865
 MonoBehaviour:
   m_ObjectHideFlags: 0

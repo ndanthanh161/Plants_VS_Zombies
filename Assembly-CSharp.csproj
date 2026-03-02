@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}</ProjectGuid>
+    <ProjectGuid>{9325BBAE-DAA4-75BB-241F-D2387F3056A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -86,10 +86,12 @@
     <Compile Include="Assets\Scripts\Zombies\ZombieController.cs" />
     <Compile Include="Assets\Scripts\SunPoint\SunFlower.cs" />
     <Compile Include="Assets\Scripts\Zombies\ZombieMovement.cs" />
+    <Compile Include="Assets\Scripts\GameController\AudioManager.cs" />
     <Compile Include="Assets\Scripts\SunPoint\Sun.cs" />
     <Compile Include="Assets\Scripts\PlantBullet\Pea.cs" />
     <Compile Include="Assets\Scripts\LaneContainer\LoseZone.cs" />
     <Compile Include="Assets\Scripts\Zombies\ZombieData.cs" />
+    <Compile Include="Assets\Scripts\PotatoMine\PotatoMine.cs" />
     <Compile Include="Assets\Scripts\Zombies\LevelWaveData.cs" />
     <Compile Include="Assets\Scripts\Grid\GridManager.cs" />
     <Compile Include="Assets\Scripts\Zombies\ZombieScore.cs" />

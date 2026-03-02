@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlantAttack : MonoBehaviour
 {
@@ -10,6 +10,14 @@ public class PlantAttack : MonoBehaviour
 
     private float laneY;
     private float laneTolerance = 0.2f;
+
+    private Animator anim; // MỚI THÊM: Biến lưu trữ Animator
+
+    private void Awake()
+    {
+        // MỚI THÊM: Lấy component Animator đang gắn trên cây đậu này
+        anim = GetComponent<Animator>();
+    }
 
     public void Init(PlantData plantData)
     {
@@ -56,6 +64,18 @@ public class PlantAttack : MonoBehaviour
     }
 
     void Shoot()
+    {
+        // 1. Chỉ ra lệnh cho cây chạy Animation (bắt đầu giật đầu)
+        if (anim != null)
+        {
+            anim.SetTrigger("Shoot");
+        }
+        // Đã xóa phần tạo viên đạn ở đây!
+    }
+
+    // 2. MỚI THÊM: Hàm này SẼ CHỈ CHẠY khi Animation chạm đến đúng khung hình
+    // Lưu ý: Bắt buộc phải có chữ "public" ở đầu!
+    public void SpawnPea()
     {
         GameObject pea = Instantiate(peaPrefab, shootPoint.position, Quaternion.identity);
 

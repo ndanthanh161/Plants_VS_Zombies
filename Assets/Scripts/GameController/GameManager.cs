@@ -5,6 +5,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Audio")]
+    public AudioClip backgroundMusic; // Kéo file .mp3 nhạc nền vào đây trong Inspector
+    public AudioClip loseSound;       // Tiếng khi thua cuộc
+    public AudioClip winSound;        // Tiếng khi thắng cuộc
+
     public int CurrentScore { get; private set; }
 
     bool isGameEnded = false;
@@ -23,6 +28,10 @@ public class GameManager : MonoBehaviour
         CurrentScore = 0;
 
         UIManager.Instance.UpdateScore(CurrentScore);
+
+        // Phát nhạc nền khi vào màn chơi
+        if (backgroundMusic != null)
+            AudioManager.GetInstance().PlayMusic(backgroundMusic);
     }
 
     public void AddScore(int amount)
@@ -36,6 +45,11 @@ public class GameManager : MonoBehaviour
         if (isGameEnded) return;
         isGameEnded = true;
 
+        // Dừng nhạc nền, phát tiếng thua
+        AudioManager.GetInstance().StopMusic();
+        if (loseSound != null)
+            AudioManager.GetInstance().PlaySound(loseSound);
+
         UIManager.Instance.ShowLose();
     }
 
@@ -43,6 +57,11 @@ public class GameManager : MonoBehaviour
     {
         if (isGameEnded) return;
         isGameEnded = true;
+
+        // Dừng nhạc nền, phát tiếng thắng
+        AudioManager.GetInstance().StopMusic();
+        if (winSound != null)
+            AudioManager.GetInstance().PlaySound(winSound);
 
         UIManager.Instance.ShowWin(CurrentScore);
     }

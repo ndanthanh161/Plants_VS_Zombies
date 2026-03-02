@@ -95,6 +95,9 @@ public class ZombieWaveSpawner : MonoBehaviour
                      - laneIndex * laneManager.grid.cellHeight;
 
         ZombieData data = GetRandomZombieByWeight(wave.zombieChances);
+        
+        // Nếu không lấy được data (do chưa cấu hình) thì thoát ra
+        if (data == null) return;
 
         Vector3 pos = new Vector3(zombieSpawnX, yPos, 0);
 
@@ -166,10 +169,20 @@ public class ZombieWaveSpawner : MonoBehaviour
 
     ZombieData GetRandomZombieByWeight(ZombieSpawnChance[] chances)
     {
+        // Kiểm tra xem đã thêm list Zombie vào trong Wave trên Inspector chưa để tránh lỗi
+        if (chances == null || chances.Length == 0)
+        {
+            Debug.LogError("Loi: Chua them Zombie vào danh sach zombieChances của Wave " + (currentWaveIndex + 1) + " ! Vui lòng cài trên Inspector.");
+            return null;
+        }
+
         int totalWeight = 0;
 
         for (int i = 0; i < chances.Length; i++)
             totalWeight += chances[i].weight;
+
+        // Tránh lỗi chia 0 nếu để tất cả Chance Weight = 0
+        if (totalWeight <= 0) return chances[0].zombieData;
 
         int random = Random.Range(0, totalWeight);
         int current = 0;
