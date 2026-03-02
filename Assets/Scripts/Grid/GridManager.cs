@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager Instance;
+
     public int rows = 5;
     public int columns = 9;
     public float cellWidth = 1.33f;
@@ -9,6 +11,15 @@ public class GridManager : MonoBehaviour
     public Vector2 startPosition = new Vector2(-2.9f, 2.1f);
 
     public GameObject cellPrefab;
+
+    [Header("Audio")]
+    [Tooltip("Tiếng trồng cây dùng chung cho tất cả các loại cây")]
+    public AudioClip plantSound;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {

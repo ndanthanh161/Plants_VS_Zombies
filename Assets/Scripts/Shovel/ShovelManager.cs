@@ -8,6 +8,10 @@ public class ShovelManager : MonoBehaviour
     [Header("Preview")]
     public GameObject shovelPreviewPrefab;
 
+    [Header("Audio")]
+    [Tooltip("Tiếng xẻ ng khi xóa cây")]
+    public AudioClip shovelSound;
+
     private GameObject currentPreview;
 
     public bool IsShovelActive { get; private set; }
@@ -34,6 +38,23 @@ public class ShovelManager : MonoBehaviour
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             DeactivateShovel();
+            return;
+        }
+
+        // Chuột trái → xẻng cây (dùng Physics2D, bỏ qua EventSystem)
+        // Cách này hoạt động với MỌI loại cây kể cả SunFlower, PotatoMine
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Collider2D[] hits = Physics2D.OverlapPointAll((Vector2)worldPos);
+            foreach (var hit in hits)
+            {
+                Cell cell = hit.GetComponent<Cell>();
+                if (cell != null && cell.isOccupied)
+                {
+                    cell.RemovePlant();
+                    break;
+                }
+            }
         }
     }
 

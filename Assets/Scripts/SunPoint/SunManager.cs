@@ -8,6 +8,10 @@ public class SunManager : MonoBehaviour
     public int currentSun = 150;
     public TextMeshProUGUI sunText;
 
+    [Header("Audio")]
+    [Tooltip("Tiếng khi click nhặt mặt trời")]
+    public AudioClip sunPickupSound;
+
     void Awake()
     {
         Instance = this;
@@ -33,6 +37,10 @@ public class SunManager : MonoBehaviour
     {
         currentSun += amount;
         UpdateUI();
+
+        // Phát tiếng nhặt mặt trời
+        if (sunPickupSound != null)
+            AudioManager.GetInstance().PlaySound(sunPickupSound);
     }
 
     void UpdateUI()

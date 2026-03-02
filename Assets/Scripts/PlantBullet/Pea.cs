@@ -14,6 +14,10 @@ public class Pea : MonoBehaviour
     public Sprite normalSprite;      // 🔥 sprite thường
     public Sprite fireSprite;        // 🔥 sprite lửa
 
+    [Header("Audio")]
+    [Tooltip("Tiếng khi đạn trúng zombie")]
+    public AudioClip hitSound;
+
     private SpriteRenderer sr;
 
     public void Init(int dmg)
@@ -57,6 +61,11 @@ public class Pea : MonoBehaviour
         {
             hasHit = true;
             zombie.TakeDamage(damage);
+
+            // Phát tiếng trúng zombie
+            if (hitSound != null)
+                AudioManager.GetInstance().PlaySound(hitSound);
+
             Destroy(gameObject);
         }
     }

@@ -18,22 +18,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
 
-        // ===== ƯU TIÊN XẺNG =====
-        if (ShovelManager.Instance != null &&
-            ShovelManager.Instance.IsShovelActive &&
-            isOccupied)
-        {
-            Destroy(currentPlant);
-            currentPlant = null;
-            isOccupied = false;
-
-            ShovelManager.Instance.DeactivateShovel();
-
-            Debug.Log("PLANT REMOVED");
-            return;
-        }
-
-        // ===== TRỒNG CÂY =====
+        // ===== TRỒNG CÂY (xẻng đã xử lý riêng qua ShovelManager.Update) =====
         if (manager == null) return;
         if (!manager.HasSelectedPlant()) return;
         if (isOccupied) return;
@@ -88,8 +73,29 @@ public class Cell : MonoBehaviour, IPointerClickHandler
 
         isOccupied = true;
 
-
         manager.ClearSelectedPlant();
         PlantPreviewController.Instance.ClearPreview();
+
+        // PHÁT TIẾNG KHI TRỒNG CÂY (để cuối cùng, không ảnh hưởng logic trồng)
+        if (GridManager.Instance != null && GridManager.Instance.plantSound != null)
+            AudioManager.GetInstance().PlaySound(GridManager.Instance.plantSound);
+    }
+
+    // Được gọi trực tiếp từ ShovelManager — hoạt động với MỌI loại cây
+    public void RemovePlant()
+    {
+        if (!isOccupied) return;
+
+        Destroy(currentPlant);
+        currentPlant = null;
+        isOccupied = false;
+
+        ShovelManager.Instance.DeactivateShovel();
+
+        // Phát tiếng xẻng
+        if (ShovelManager.Instance.shovelSound != null)
+            AudioManager.GetInstance().PlaySound(ShovelManager.Instance.shovelSound);
+
+        Debug.Log("PLANT REMOVED");
     }
 }

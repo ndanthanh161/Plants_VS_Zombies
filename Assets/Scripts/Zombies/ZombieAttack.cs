@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ZombieAttack : MonoBehaviour
 {
@@ -8,6 +9,14 @@ public class ZombieAttack : MonoBehaviour
     float timer;
     Plant target;
     ZombieMovement movement;
+
+    [Header("Audio")]
+    [Tooltip("Tiếng zombie ăn cây")]
+    public AudioClip eatSound;
+    [Tooltip("Thời gian (giây) giữa các lần phát tiếng ăn")]
+    public float eatSoundInterval = 1.2f;
+
+    private Coroutine eatSoundCoroutine;
 
     void Awake()
     {
@@ -28,6 +37,7 @@ public class ZombieAttack : MonoBehaviour
         if (target == null)
         {
             movement.SetEating(false);
+            StopEatSound();
             return;
         }
 
@@ -36,6 +46,7 @@ public class ZombieAttack : MonoBehaviour
         {
             target = null;
             movement.SetEating(false);
+            StopEatSound();
             return;
         }
 
@@ -58,8 +69,9 @@ public class ZombieAttack : MonoBehaviour
         if (plant == null) return;
 
         target = plant;
-        timer = 0f; // reset timer khi bắt đầu cắn
+        timer = 0f;
         movement.SetEating(true);
+        StartEatSound(); // Bắt đầu phát tiếng ăn
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -71,6 +83,39 @@ public class ZombieAttack : MonoBehaviour
         {
             target = null;
             movement.SetEating(false);
+            StopEatSound(); // Dừng tiếng ăn
         }
     }
+
+    // ===== Phát tiếng ăn lặp định kỳ =====
+    void StartEatSound()
+    {
+        if (eatSound == null) return;
+        if (eatSoundCoroutine != null) StopCoroutine(eatSoundCoroutine);
+        eatSoundCoroutine = StartCoroutine(EatSoundLoop());
+    }
+
+    void StopEatSound()
+    {
+        if (eatSoundCoroutine != null)
+        {
+            StopCoroutine(eatSoundCoroutine);
+            eatSoundCoroutine = null;
+        }
+    }
+
+    IEnumerator EatSoundLoop()
+    {
+        while (true)
+        {
+            AudioManager.GetInstance().PlaySound(eatSound);
+            yield return new WaitForSeconds(eatSoundInterval);
+        }
+    }
+
+    void OnDestroy()
+    {
+        StopEatSound();
+    }
 }
+
