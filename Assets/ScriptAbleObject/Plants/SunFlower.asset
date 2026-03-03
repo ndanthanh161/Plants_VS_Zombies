@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlantData
   previewPrefab: {fileID: 7348742598919116380, guid: a01a0b1fc7ed2d6449c019ede6cf39dc, type: 3}
   plantName: SunFlower
-  icon: {fileID: -2896108089290285018, guid: 78c3c1e5115fea549a1c537a5bf61da8, type: 3}
+  icon: {fileID: -6686672604181963583, guid: a1431104b2089e147a853b88f8d6f635, type: 3}
   cost: 50
   cooldown: 5
   plantPrefab: {fileID: 6030576142770589455, guid: b31539119cc7e0d4ca22a03777c74670, type: 3}

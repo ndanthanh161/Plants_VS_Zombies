@@ -12,6 +12,7 @@ public class PlantAttack : MonoBehaviour
     private float laneTolerance = 0.2f;
 
     private Animator anim; // MỚI THÊM: Biến lưu trữ Animator
+    private bool isSpawningPea = false; // 🐛 Guard chống SpawnPea bị gọi 2 lần trong cùng 1 frame
 
     private void Awake()
     {
@@ -77,12 +78,20 @@ public class PlantAttack : MonoBehaviour
     // Lưu ý: Bắt buộc phải có chữ "public" ở đầu!
     public void SpawnPea()
     {
-        GameObject pea = Instantiate(peaPrefab, shootPoint.position, Quaternion.identity);
+        // Guard: nếu frame này đã spawn rồi thì bỏ qua (chống Animation Event bị duplicate)
+        if (isSpawningPea) return;
+        isSpawningPea = true;
 
+        GameObject pea = Instantiate(peaPrefab, shootPoint.position, Quaternion.identity);
         Pea peaScript = pea.GetComponent<Pea>();
         if (peaScript != null)
         {
             peaScript.Init(data.damage);
         }
+
+        // Reset flag sau frame này (dùng Invoke thày StartCoroutine để giản dị)
+        Invoke(nameof(ResetSpawnGuard), 0.05f);
     }
+
+    void ResetSpawnGuard() => isSpawningPea = false;
 }

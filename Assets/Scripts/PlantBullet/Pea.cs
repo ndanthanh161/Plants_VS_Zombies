@@ -57,16 +57,17 @@ public class Pea : MonoBehaviour
         if (!other.CompareTag("Zombie")) return;
 
         ZombieHealth zombie = other.GetComponentInParent<ZombieHealth>();
-        if (zombie != null)
-        {
-            hasHit = true;
-            zombie.TakeDamage(damage);
+        if (zombie == null) return;
 
-            // Phát tiếng trúng zombie
-            if (hitSound != null)
-                AudioManager.GetInstance().PlaySound(hitSound);
+        // ✅ Fix double damage: set hasHit TRƯỚC khi gọi TakeDamage
+        // Tránh trường hợp Zombie có 2 Collider2D (body + head) cùng trigger 1 frame
+        hasHit = true;
+        zombie.TakeDamage(damage);
 
-            Destroy(gameObject);
-        }
+        // Phát tiếng trúng zombie
+        if (hitSound != null)
+            AudioManager.GetInstance().PlaySound(hitSound);
+
+        Destroy(gameObject);
     }
 }

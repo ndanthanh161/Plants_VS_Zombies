@@ -121,6 +121,29 @@ public class AudioManager : MonoBehaviour
         return source;
     }
 
+    /// <summary>Chỉ phát nếu clip này chưa đang phát — tránh chồng chéo âm thanh.</summary>
+    public void PlaySoundOnce(AudioClip sound)
+    {
+        if (sound == null) return;
+
+        // Kiểm tra nếu clip đang phát thì bỏ qua
+        foreach (AudioSource src in sounds)
+            if (src != null && src.isPlaying && src.clip == sound) return;
+
+        PlaySound(sound);
+    }
+
+    /// <summary>Dừng tất cả AudioSource đang phát clip này.</summary>
+    public void StopSoundByClip(AudioClip sound)
+    {
+        if (sound == null) return;
+        foreach (AudioSource src in sounds)
+        {
+            if (src != null && src.clip == sound && src.isPlaying)
+                src.Stop();
+        }
+    }
+
     public void StopSound(AudioSource sound)
     {
         if (sound != null)

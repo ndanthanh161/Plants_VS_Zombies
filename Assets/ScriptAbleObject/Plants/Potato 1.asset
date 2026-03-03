@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlantData
   previewPrefab: {fileID: 6030576142770589455, guid: 0d33f31c65efea2449db2ab63c1d80b9, type: 3}
   plantName: PotatoMine
-  icon: {fileID: 6802033678843964677, guid: cf8594cf2d26fc44da76995ce18fc8d6, type: 3}
+  icon: {fileID: -1457229326589977717, guid: d10e9635ec726b54abd2a81539229b3a, type: 3}
   cost: 50
   cooldown: 5
   plantPrefab: {fileID: 6030576142770589455, guid: 0aef2cc9e1fa9c947ae28f744328ae92, type: 3}

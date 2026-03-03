@@ -32,4 +32,10 @@ public class ZombieMovement : MonoBehaviour
             visual.Anim.SetBool("IsEating", value);
         }
     }
+
+    /// <summary>Nhân tốc độ hiện tại theo hệ số. Boss dùng khi vào Phase 2.</summary>
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        moveSpeed *= multiplier;
+    }
 }

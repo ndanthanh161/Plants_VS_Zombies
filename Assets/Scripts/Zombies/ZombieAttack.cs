@@ -32,6 +32,12 @@ public class ZombieAttack : MonoBehaviour
         attackInterval = data.attackInterval;
     }
 
+    /// <summary>Nhân sát thương hiện tại theo hệ số. Boss dùng khi vào Phase 2.</summary>
+    public void SetDamageMultiplier(float multiplier)
+    {
+        damage = Mathf.RoundToInt(damage * multiplier);
+    }
+
     void Update()
     {
         if (target == null)
@@ -102,13 +108,17 @@ public class ZombieAttack : MonoBehaviour
             StopCoroutine(eatSoundCoroutine);
             eatSoundCoroutine = null;
         }
+
+        // Dừng ngay clip đang phát dở, không để chạy tiếp
+        if (eatSound != null)
+            AudioManager.GetInstance().StopSoundByClip(eatSound);
     }
 
     IEnumerator EatSoundLoop()
     {
         while (true)
         {
-            AudioManager.GetInstance().PlaySound(eatSound);
+            AudioManager.GetInstance().PlaySoundOnce(eatSound); // Không chồng nhau dù nhiều zombie
             yield return new WaitForSeconds(eatSoundInterval);
         }
     }

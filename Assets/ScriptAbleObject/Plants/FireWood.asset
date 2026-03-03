@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlantData
   previewPrefab: {fileID: 7348742598919116380, guid: e50ea561fb7af014e99dc5842f530f53, type: 3}
   plantName: FireWood
-  icon: {fileID: -3914404500002775089, guid: c5b5b5060db089348901b536c548f04d, type: 3}
+  icon: {fileID: -914027405017503861, guid: cba494411d6c1864380eb26b927dba4a, type: 3}
   cost: 75
   cooldown: 5
   plantPrefab: {fileID: 6030576142770589455, guid: c03a905a08efa1d4aa26c6e31c73a9d7, type: 3}

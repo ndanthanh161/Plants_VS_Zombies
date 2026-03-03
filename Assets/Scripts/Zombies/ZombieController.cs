@@ -34,5 +34,12 @@ public class ZombieController : MonoBehaviour
 
         if (health != null)
             health.Init(data);
+
+        // Nếu là Boss → khởi tạo thêm boss logic
+        ZombieBoss boss = GetComponent<ZombieBoss>();
+        if (boss != null && data is ZombieBossData bossData)
+        {
+            boss.InitBoss(bossData);
+        }
     }
 }

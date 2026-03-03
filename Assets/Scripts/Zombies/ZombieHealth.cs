@@ -10,7 +10,8 @@ public class ZombieHealth : MonoBehaviour
 
     public event Action<ZombieHealth> OnDeath;
 
-    public int ScoreValue => scoreValue;   // 🔥 THÊM DÒNG NÀY
+    public int ScoreValue => scoreValue;
+    public int CurrentHP => currentHP;  // Cho ZombieBoss đọc HP hiện tại
 
     void Awake()
     {

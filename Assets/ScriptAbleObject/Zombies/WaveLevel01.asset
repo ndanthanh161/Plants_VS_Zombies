@@ -17,12 +17,12 @@ MonoBehaviour:
     spawnInterval: 2
     intervalRandomOffset: 1
     zombieChances:
-    - zombieData: {fileID: 11400000, guid: 39ed1fec0822b824e88e762eb3ade983, type: 2}
-      weight: 1
+    - zombieData: {fileID: 11400000, guid: 569e535a81930b642b220e328317e915, type: 2}
+      weight: 100
     - zombieData: {fileID: 11400000, guid: 0bbe3e2f0db25874a819d8c5c202868a, type: 2}
       weight: 1
     - zombieData: {fileID: 11400000, guid: 7042dda8e37b5c54291df0c7a8d636cd, type: 2}
-      weight: 100
+      weight: 1
     isHugeWave: 0
   - zombieCount: 3
     spawnInterval: 1
