@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [Header("Panels")]
     public GameObject losePanel;
     public GameObject winPanel;
+    public GameObject pausePanel;
 
     [Header("Win UI")]
     public TextMeshProUGUI winScoreText;
@@ -27,6 +28,9 @@ public class UIManager : MonoBehaviour
 
         if (winPanel != null)
             winPanel.SetActive(false);
+
+        if (pausePanel != null)
+            pausePanel.SetActive(false);
     }
 
     public void UpdateScore(int score)
@@ -52,5 +56,11 @@ public class UIManager : MonoBehaviour
             winScoreText.text = "Your Score:\n" + score;
 
         Time.timeScale = 0f;
+    }
+
+    public void ShowPause(bool isShow)
+    {
+        if (pausePanel != null)
+            pausePanel.SetActive(isShow);
     }
 }

@@ -13,36 +13,14 @@ MonoBehaviour:
   m_Name: WaveLevel01
   m_EditorClassIdentifier: Assembly-CSharp::ZombieWaveLevelData
   waves:
-  - zombieCount: 3
-    spawnInterval: 2
+  - zombieCount: 1000
+    spawnInterval: 1
     intervalRandomOffset: 1
     zombieChances:
     - zombieData: {fileID: 11400000, guid: 569e535a81930b642b220e328317e915, type: 2}
-      weight: 100
+      weight: 10
     - zombieData: {fileID: 11400000, guid: 0bbe3e2f0db25874a819d8c5c202868a, type: 2}
-      weight: 1
-    - zombieData: {fileID: 11400000, guid: 7042dda8e37b5c54291df0c7a8d636cd, type: 2}
-      weight: 1
+      weight: 80
+    - zombieData: {fileID: 11400000, guid: 0bbe3e2f0db25874a819d8c5c202868a, type: 2}
+      weight: 10
     isHugeWave: 0
-  - zombieCount: 3
-    spawnInterval: 1
-    intervalRandomOffset: 1
-    zombieChances:
-    - zombieData: {fileID: 0}
-      weight: 0
-    - zombieData: {fileID: 0}
-      weight: 0
-    - zombieData: {fileID: 0}
-      weight: 0
-    isHugeWave: 0
-  - zombieCount: 3
-    spawnInterval: 1
-    intervalRandomOffset: 1
-    zombieChances:
-    - zombieData: {fileID: 0}
-      weight: 0
-    - zombieData: {fileID: 0}
-      weight: 0
-    - zombieData: {fileID: 0}
-      weight: 0
-    isHugeWave: 1

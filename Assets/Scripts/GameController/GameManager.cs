@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -85,9 +85,24 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
     }
 
-    public void ExitToMenu()
+    // Chuyển ra màn hình chính
+    public void QuitToMenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    // Tạm dừng game
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        UIManager.Instance.ShowPause(true);
+    }
+
+    // Tiếp tục game
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        UIManager.Instance.ShowPause(false);
     }
 }

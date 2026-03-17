@@ -7,11 +7,10 @@ public class MainMenuManager : MonoBehaviour
     public GameObject levelSelectPanel;
 
     [Header("Audio")]
-    public AudioClip menuMusic; // Kéo file .mp3 nhạc Menu vào đây trong Inspector
+    public AudioClip menuMusic;
 
     void Start()
     {
-        // Phát nhạc nền khi ở màn hình chính
         if (menuMusic != null)
             AudioManager.GetInstance().PlayMusic(menuMusic);
     }
@@ -25,5 +24,16 @@ public class MainMenuManager : MonoBehaviour
     public void PlayLevel1()
     {
         SceneManager.LoadScene("Level_01");
+    }
+
+    // Thoát game hẳn (dùng cho bản Build)
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }

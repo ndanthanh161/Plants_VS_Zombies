@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   mainMenuPanel: {fileID: 724317980}
   levelSelectPanel: {fileID: 917643304}
+  menuMusic: {fileID: 8300000, guid: b3c7dfc23ea23a0469d3b18b988dd943, type: 3}
 --- !u!4 &152670480
 Transform:
   m_ObjectHideFlags: 0
@@ -1084,6 +1085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   mainMenuPanel: {fileID: 0}
   levelSelectPanel: {fileID: 0}
+  menuMusic: {fileID: 0}
 --- !u!114 &1765541797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,7 +1193,7 @@ GameObject:
   - component: {fileID: 1955963139}
   - component: {fileID: 1955963138}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1259,7 +1261,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1955963139}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 152670479}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1955963139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,7 +1294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6343343624715745915, guid: 3ec2c426271f374489f1f4eddb672d6e, type: 3}
+  m_Sprite: {fileID: -4441840087703766896, guid: 2896b712f4d83ba4f9f85ac4aab70e74, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
