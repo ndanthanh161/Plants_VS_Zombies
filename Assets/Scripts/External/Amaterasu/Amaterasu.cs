@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,36 +8,28 @@ public class AmaterasuSkill : MonoBehaviour
     public static AmaterasuSkill Instance;
 
     [Header("Cài đặt Skill")]
-    [Tooltip("Giá sun để dùng skill")]
     public int sunCost = 300;
-
-    [Tooltip("Cooldown sau mỗi lần dùng (giây)")]
     public float cooldownTime = 45f;
-
-    [Tooltip("Delay trước khi hiệu ứng kích hoạt (giây)")]
-    public float activationDelay = 1.0f;
-
-    [Tooltip("Sát thương (đặt cực cao để giết ngay)")]
+    public float activationDelay = 1.2f;
     public int damage = 99999;
 
-    [Header("Hiệu ứng")]
-    [Tooltip("Prefab hiệu ứng lửa đen (tùy chọn)")]
+    [Header("Hiệu ứng (Cinematic)")]
+    [Tooltip("Prefab hiệu ứng lửa đen (Sẽ hiển thị ngay giữa màn hình như bản gốc)")]
     public GameObject fireEffectPrefab;
-
-    [Tooltip("Thời gian hiệu ứng tồn tại")]
     public float effectDuration = 3f;
+    public float cameraShakeIntensity = 0.1f;
+    
+    [Tooltip("Kích hoạt ngưng đọng thời gian (Bullet-time) khi gồng ấn")]
+    public bool useSlowMotion = true;
+    [Tooltip("Mức độ làm chậm (0.2 là siêu chậm, 1 là bình thường)")]
+    public float slowMotionScale = 0.2f;
 
     [Header("Audio")]
     public AudioClip activationSound;
 
     [Header("UI References")]
-    [Tooltip("Nút bấm kích hoạt skill")]
     public Button skillButton;
-
-    [Tooltip("Overlay cooldown (Image fillAmount)")]
     public Image cooldownOverlay;
-
-    [Tooltip("Text hiển thị giá sun")]
     public TextMeshProUGUI costText;
 
     private bool isCoolingDown = false;
@@ -66,7 +58,6 @@ public class AmaterasuSkill : MonoBehaviour
 
     void Update()
     {
-        // Xử lý cooldown
         if (isCoolingDown)
         {
             cooldownTimer -= Time.deltaTime;
@@ -82,7 +73,6 @@ public class AmaterasuSkill : MonoBehaviour
             }
         }
 
-        // Cập nhật trạng thái nút
         if (skillButton != null)
         {
             bool canUse = !isCoolingDown
@@ -98,17 +88,10 @@ public class AmaterasuSkill : MonoBehaviour
     {
         if (isCoolingDown || isActivating) return;
 
-        // Check tiền
-        if (SunManager.Instance == null || !SunManager.Instance.CanAfford(sunCost))
-        {
-            Debug.Log("[Amaterasu] Không đủ sun!");
-            return;
-        }
+        if (SunManager.Instance == null || !SunManager.Instance.CanAfford(sunCost)) return;
 
-        // Trừ tiền
         SunManager.Instance.SpendSun(sunCost);
 
-        // Bắt đầu kích hoạt
         StartCoroutine(ActivateAmaterasu());
     }
 
@@ -116,44 +99,56 @@ public class AmaterasuSkill : MonoBehaviour
     {
         isActivating = true;
 
-        // === Phát âm thanh ===
         if (activationSound != null)
             AudioManager.GetInstance().PlaySound(activationSound);
 
-        // === Delay trước khi gây damage ===
-        yield return new WaitForSeconds(activationDelay);
+        if (useSlowMotion)
+        {
+            Time.timeScale = slowMotionScale;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale; 
+        }
 
-        // === Spawn hiệu ứng lửa đen ===
+        StartCoroutine(DarkenScreenRoutine(activationDelay));
+        StartCoroutine(CameraShakeRoutine(activationDelay + effectDuration, cameraShakeIntensity));
+
+        // Đợi theo thời gian thực (realtime)
+        yield return new WaitForSecondsRealtime(activationDelay);
+
+        if (useSlowMotion)
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f;
+        }
+
+        // Đã xóa hiệu ứng nhá màn hình đỏ theo yêu cầu
+
+        // GIỮ NGUYÊN CƠ CHẾ SPAWN GIỮA BẢN ĐỒ CỦA BẢN GỐC
         SpawnFireEffect();
 
-        // === Giết tất cả Zombie ===
+        // GIỮ NGUYÊN CƠ CHẾ XÓA SỔ ZOMBIE VÀ THỰC VẬT CỦA BẢN GỐC
         ZombieHealth[] allZombies = FindObjectsByType<ZombieHealth>(FindObjectsSortMode.None);
         foreach (ZombieHealth zombie in allZombies)
         {
             if (zombie != null)
                 zombie.TakeDamage(damage);
         }
-        Debug.Log($"[Amaterasu] Đã thiêu cháy {allZombies.Length} zombie!");
-
-        // === Giết tất cả Plant ===
+        
         PlantHealth[] allPlants = FindObjectsByType<PlantHealth>(FindObjectsSortMode.None);
         foreach (PlantHealth plant in allPlants)
         {
             if (plant != null)
                 plant.TakeDamage(damage);
         }
-        Debug.Log($"[Amaterasu] Đã thiêu cháy {allPlants.Length} cây trồng!");
 
-        // === Reset tất cả ô đất ===
         Cell[] allCells = FindObjectsByType<Cell>(FindObjectsSortMode.None);
         foreach (Cell cell in allCells)
         {
             if (cell != null)
                 cell.isOccupied = false;
         }
-        Debug.Log("[Amaterasu] Đã reset tất cả ô đất!");
 
-        // === Bắt đầu cooldown ===
+        Debug.Log($"[Amaterasu] Đã thiêu rụi {allZombies.Length} zombie và {allPlants.Length} cây!");
+
         isCoolingDown = true;
         cooldownTimer = cooldownTime;
         isActivating = false;
@@ -165,6 +160,7 @@ public class AmaterasuSkill : MonoBehaviour
         }
     }
 
+    // Cơ chế gốc: Đẻ 1 cục lửa khổng lồ giữa bản đồ
     void SpawnFireEffect()
     {
         if (fireEffectPrefab == null || GridManager.Instance == null) return;
@@ -178,5 +174,58 @@ public class AmaterasuSkill : MonoBehaviour
 
         GameObject effect = Instantiate(fireEffectPrefab, center, Quaternion.identity);
         Destroy(effect, effectDuration);
+    }
+
+    IEnumerator DarkenScreenRoutine(float delayBeforeHit)
+    {
+        GameObject canvasObj = new GameObject("AmaterasuDarkOverlay");
+        Canvas canvas = canvasObj.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 999; 
+
+        Image img = canvasObj.AddComponent<Image>();
+        img.color = new Color(0, 0, 0, 0);
+
+        float elapsed = 0f;
+        while (elapsed < delayBeforeHit)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float alpha = Mathf.Lerp(0f, 0.85f, elapsed / delayBeforeHit); 
+            img.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+
+        yield return new WaitForSecondsRealtime(effectDuration);
+
+        elapsed = 0f;
+        while (elapsed < 1f)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float alpha = Mathf.Lerp(0.85f, 0f, elapsed / 1f);
+            img.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+
+        Destroy(canvasObj);
+    }
+
+    IEnumerator CameraShakeRoutine(float duration, float magnitude)
+    {
+        if (Camera.main == null) yield break;
+        Vector3 originalPos = Camera.main.transform.localPosition;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            Camera.main.transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        Camera.main.transform.localPosition = originalPos;
     }
 }
