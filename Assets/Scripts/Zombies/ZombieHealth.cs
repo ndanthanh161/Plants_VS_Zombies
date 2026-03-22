@@ -1,8 +1,12 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class ZombieHealth : MonoBehaviour
 {
+    [Header("Cài đặt cái chết")]
+    [Tooltip("Khoảng thời gian (giây) zombie nằm trên sân chờ chạy hết hoạt ảnh chết trước khi biến mất")]
+    public float deathAnimationTime = 2.5f;
+
     int currentHP;
     int scoreValue;
     ZombieVisual visual;
@@ -81,7 +85,7 @@ public class ZombieHealth : MonoBehaviour
         // Đẩy xuống cuối sorting order (hoặc lùi lại z) để xác zombie nằm dưới các con zombie khác đang sống
         transform.SetAsFirstSibling();
 
-        // Delay 1.5 - 2s (tuỳ độ dài animation Die) rồi mới xóa bỏ GameObject khỏi scene
-        Destroy(gameObject, 1.5f);
+        // Xóa vỏ bọc Zombie dựa trên thời gian tùy chỉnh
+        Destroy(gameObject, deathAnimationTime);
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4393b04c16fe04184a14cef855f6a2, type: 3}
+  m_Name: Zombie_Flag
+  m_EditorClassIdentifier: Assembly-CSharp::ZombieData
+  moveSpeed: 0.1
+  maxHp: 100
+  damage: 1
+  attackInterval: 4
+  scoreValue: 100
+  visualPrefab: {fileID: 992538606757318848, guid: fce386b23ae44fd4182affcd187267c9, type: 3}

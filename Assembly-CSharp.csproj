@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\External\Amaterasu\Amaterasu.cs" />
     <Compile Include="Assets\Scripts\Zombies\ZombieController.cs" />
     <Compile Include="Assets\Scripts\SunPoint\SunFlower.cs" />
+    <Compile Include="Assets\Scripts\PlantCard\SnapDragon.cs" />
     <Compile Include="Assets\Scripts\Zombies\ZombieMovement.cs" />
     <Compile Include="Assets\Scripts\GameController\AudioManager.cs" />
     <Compile Include="Assets\Scripts\SunPoint\Sun.cs" />

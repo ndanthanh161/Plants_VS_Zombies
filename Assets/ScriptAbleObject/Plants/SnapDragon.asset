@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7268c9b4d7222543a1609db7b031c4b, type: 3}
+  m_Name: SnapDragon
+  m_EditorClassIdentifier: Assembly-CSharp::PlantData
+  previewPrefab: {fileID: 7348742598919116380, guid: 63334f8570122404c8ef0207d3f81cdf, type: 3}
+  plantName: SnapDragon
+  icon: {fileID: 6802033678843964677, guid: 8ed906adcf5b0474b89dbb0122798fa9, type: 3}
+  cost: 50
+  cooldown: 5
+  plantPrefab: {fileID: 6030576142770589455, guid: 68f085b842a6af84098c8fa8b7d46dd5, type: 3}
+  maxHP: 100
+  damage: 100
+  attackInterval: 2
