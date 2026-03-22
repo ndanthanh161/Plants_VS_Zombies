@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4393b04c16fe04184a14cef855f6a2, type: 3}
   m_Name: Zombie_Red
   m_EditorClassIdentifier: Assembly-CSharp::ZombieData
-  moveSpeed: 1.5
-  maxHp: 200
-  damage: 20
-  attackInterval: 4
-  scoreValue: 100
+  moveSpeed: 0.7
+  maxHp: 1700
+  damage: 70
+  attackInterval: 2
+  scoreValue: 400
   visualPrefab: {fileID: 992538606757318848, guid: d9b15ce3accbb8342b1b002c52f9ec1c, type: 3}

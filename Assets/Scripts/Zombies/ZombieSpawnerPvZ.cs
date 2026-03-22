@@ -13,11 +13,46 @@ public class ZombieWaveSpawner : MonoBehaviour
 
     int spawnedInWave;
     int aliveZombies;
-
+    
+    // Lưu trữ danh sách zombie sẽ xuất hiện trong Wave hiện tại (Deck)
+    System.Collections.Generic.List<ZombieData> zombieDeck = new System.Collections.Generic.List<ZombieData>();
 
     void Start()
     {
+        if (levelData != null && levelData.waves.Length > 0)
+        {
+            GenerateWaveDeck(levelData.waves[currentWaveIndex]);
+        }
         CalculateNextInterval();
+    }
+
+    void GenerateWaveDeck(ZombieWave wave)
+    {
+        zombieDeck.Clear();
+
+        if (wave.zombieChances == null || wave.zombieChances.Length == 0) return;
+        
+        // BƯỚC 1: Đảm bảo nhét ít nhất 1 con của mỗi loại được định cấu hình vào cỗ bài
+        int guaranteedCount = Mathf.Min(wave.zombieChances.Length, wave.zombieCount);
+        for (int i = 0; i < guaranteedCount; i++)
+        {
+            zombieDeck.Add(wave.zombieChances[i].zombieData);
+        }
+        
+        // BƯỚC 2: Các slot còn lại (nếu có) sẽ bốc thăm Gacha dựa trên Weight như cũ
+        for (int i = guaranteedCount; i < wave.zombieCount; i++)
+        {
+            zombieDeck.Add(GetRandomZombieByWeight(wave.zombieChances));
+        }
+        
+        // BƯỚC 3: Xào bài để bọn chúng ra ngẫu nhiên chứ không bị ra có thứ tự
+        for (int i = 0; i < zombieDeck.Count; i++)
+        {
+            int randomIndex = Random.Range(i, zombieDeck.Count);
+            ZombieData temp = zombieDeck[i];
+            zombieDeck[i] = zombieDeck[randomIndex];
+            zombieDeck[randomIndex] = temp;
+        }
     }
 
     void Update()
@@ -94,7 +129,11 @@ public class ZombieWaveSpawner : MonoBehaviour
         float yPos = laneManager.grid.startPosition.y
                      - laneIndex * laneManager.grid.cellHeight;
 
-        ZombieData data = GetRandomZombieByWeight(wave.zombieChances);
+        if (zombieDeck.Count == 0) return; // Bảo vệ bộ bài rỗng
+
+        // Bốc thẻ bài trên cùng trong bộ bài đã xào (Deck)
+        ZombieData data = zombieDeck[0];
+        zombieDeck.RemoveAt(0);
         
         // Nếu không lấy được data (do chưa cấu hình) thì thoát ra
         if (data == null) return;
@@ -161,6 +200,7 @@ public class ZombieWaveSpawner : MonoBehaviour
         aliveZombies = 0;
         spawnTimer = 0f;
 
+        GenerateWaveDeck(levelData.waves[currentWaveIndex]);
         CalculateNextInterval();
 
         Debug.Log("Wave " + (currentWaveIndex + 1) + " Start");

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4071b6852596f44b390fe3b1d54cdb, type: 3}
   m_Name: ZombieBoss
   m_EditorClassIdentifier: Assembly-CSharp::ZombieBossData
-  moveSpeed: 2
-  maxHp: 1
-  damage: 11
+  moveSpeed: 0.4
+  maxHp: 4000
+  damage: 99999
   attackInterval: 3.7
-  scoreValue: 100
+  scoreValue: 500
   visualPrefab: {fileID: 992538606757318848, guid: d605e34af9102ae46928ca8d6a6b1646, type: 3}
   phase2Threshold: 0.5
   phase2SpeedMultiplier: 10

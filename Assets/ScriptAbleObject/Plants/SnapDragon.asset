@@ -15,9 +15,9 @@ MonoBehaviour:
   previewPrefab: {fileID: 7348742598919116380, guid: 63334f8570122404c8ef0207d3f81cdf, type: 3}
   plantName: SnapDragon
   icon: {fileID: 6802033678843964677, guid: 8ed906adcf5b0474b89dbb0122798fa9, type: 3}
-  cost: 50
+  cost: 200
   cooldown: 5
   plantPrefab: {fileID: 6030576142770589455, guid: 68f085b842a6af84098c8fa8b7d46dd5, type: 3}
-  maxHP: 100
+  maxHP: 300
   damage: 100
   attackInterval: 2

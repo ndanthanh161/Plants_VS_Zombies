@@ -15,9 +15,9 @@ MonoBehaviour:
   previewPrefab: {fileID: 7579427824046433254, guid: 2e733daa1e7046e4f84dd0f39bcfa723, type: 3}
   plantName: Peashooter2
   icon: {fileID: 6802033678843964677, guid: 990389d53e5388940b134ad06d36747e, type: 3}
-  cost: 100
+  cost: 250
   cooldown: 5
   plantPrefab: {fileID: 4460304116807110213, guid: da68ef31372a27741b25c97a0fdb9963, type: 3}
-  maxHP: 100
-  damage: 200
+  maxHP: 300
+  damage: 150
   attackInterval: 2

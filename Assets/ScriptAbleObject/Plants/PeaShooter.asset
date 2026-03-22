@@ -18,6 +18,6 @@ MonoBehaviour:
   cost: 100
   cooldown: 5
   plantPrefab: {fileID: 4460304116807110213, guid: 5f287009498bb9f48ad72b93b27cf643, type: 3}
-  maxHP: 100
-  damage: 50
+  maxHP: 300
+  damage: 200
   attackInterval: 2
