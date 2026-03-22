@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: WaveLevel01
   m_EditorClassIdentifier: Assembly-CSharp::ZombieWaveLevelData
   waves:
-  - zombieCount: 1
+  - zombieCount: 3
     spawnInterval: 3
     intervalRandomOffset: 1
     zombieChances:
-    - zombieData: {fileID: 11400000, guid: 0bbe3e2f0db25874a819d8c5c202868a, type: 2}
+    - zombieData: {fileID: 11400000, guid: 569e535a81930b642b220e328317e915, type: 2}
       weight: 10
     isHugeWave: 0
