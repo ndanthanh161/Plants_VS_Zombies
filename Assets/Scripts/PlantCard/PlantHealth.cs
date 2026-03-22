@@ -14,9 +14,11 @@ public class PlantHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
+        Debug.Log($"[PlantHealth] {gameObject.name} bị trừ {damage} máu. Máu còn lại: {currentHP}");
 
         if (currentHP <= 0)
         {
+            Debug.Log($"[PlantHealth] {gameObject.name} ĐÃ CHẾT");
             Die();
         }
     }

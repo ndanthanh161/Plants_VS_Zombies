@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class ZombieAttack : MonoBehaviour
@@ -57,9 +57,12 @@ public class ZombieAttack : MonoBehaviour
         }
 
         timer += Time.deltaTime;
+        // Debug để xem tại sao nó k nhảy vào if:
+        Debug.Log($"[ZombieAttack] Update: timer={timer}, attackInterval={attackInterval}, target={target.name}");
 
         if (timer >= attackInterval)
         {
+            Debug.Log($"[ZombieAttack] Zombie {gameObject.name} gây {damage} sát thương cho {target.name}");
             target.TakeDamage(damage);
             timer = 0f;
         }
@@ -75,6 +78,7 @@ public class ZombieAttack : MonoBehaviour
         if (plant == null) return;
 
         target = plant;
+        Debug.Log($"[ZombieAttack] Zombie chạm vào {plant.name}, gán target thành công!");
         timer = 0f;
         movement.SetEating(true);
         StartEatSound(); // Bắt đầu phát tiếng ăn
