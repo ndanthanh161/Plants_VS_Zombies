@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7268c9b4d7222543a1609db7b031c4b, type: 3}
+  m_Name: Pea2
+  m_EditorClassIdentifier: Assembly-CSharp::PlantData
+  previewPrefab: {fileID: 7579427824046433254, guid: 2e733daa1e7046e4f84dd0f39bcfa723, type: 3}
+  plantName: Peashooter2
+  icon: {fileID: 6802033678843964677, guid: 990389d53e5388940b134ad06d36747e, type: 3}
+  cost: 100
+  cooldown: 5
+  plantPrefab: {fileID: 4460304116807110213, guid: da68ef31372a27741b25c97a0fdb9963, type: 3}
+  maxHP: 100
+  damage: 200
+  attackInterval: 2

@@ -86,7 +86,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 3
   m_MaskInteraction: 2
   m_Sprite: {fileID: -3838591293664092514, guid: 88f48469158e7f744b51998b7a306ccf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -124,6 +124,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlantAttack
   shootPoint: {fileID: 6313348801831595546}
   peaPrefab: {fileID: 7915763355628073869, guid: 16c94a73dd5a7064b8ba2e66f59bf8cf, type: 3}
+  bulletCount: 1
+  burstDelay: 0.15
+  useAnimationEvent: 1
+  delayBeforeShoot: 0.2
 --- !u!114 &5851908909697556904
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,9 +1,22 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System.Collections;
 
 public class PlantAttack : MonoBehaviour
 {
     public Transform shootPoint;
     public GameObject peaPrefab;
+
+    [Header("Cấu hình Tấn công (Burst)")]
+    [Tooltip("Số viên đạn mỗi lần bắn (Ví dụ: 1 cho đậu thường, 4 cho đậu nhiều nòng)")]
+    public int bulletCount = 1;
+    [Tooltip("Thời gian chờ giữa 2 viên đạn trong cùng 1 lần bắn")]
+    public float burstDelay = 0.15f;
+
+    [Header("Cấu hình Animation")]
+    [Tooltip("Bật nếu Animation của bạn được set Animation Event 'SpawnPea'. Tắt nếu tự bắn bỏ qua Event.")]
+    public bool useAnimationEvent = true;
+    [Tooltip("Delay chờ mồm cây mở ra (Chỉ xài khi Tắt Animation Event ở trên)")]
+    public float delayBeforeShoot = 0.2f;
 
     private float attackTimer;
     private PlantData data;
@@ -71,26 +84,63 @@ public class PlantAttack : MonoBehaviour
         {
             anim.SetTrigger("Shoot");
         }
-        // Đã xóa phần tạo viên đạn ở đây!
+
+        // 2. Nếu không xài Event từ Unity Animation, lập tức tự khởi chạy luồng bắn
+        if (!useAnimationEvent)
+        {
+            StartCoroutine(SpawnPeaBurstTimer());
+        }
+    }
+
+    IEnumerator SpawnPeaBurstTimer()
+    {
+        yield return new WaitForSeconds(delayBeforeShoot);
+        StartCoroutine(SpawnPeaBurst());
     }
 
     // 2. MỚI THÊM: Hàm này SẼ CHỈ CHẠY khi Animation chạm đến đúng khung hình
     // Lưu ý: Bắt buộc phải có chữ "public" ở đầu!
     public void SpawnPea()
     {
+        // Nếu đã để tự động nhả đạn (useAnimationEvent tắt), thì bỏ qua lệnh này để tránh đạn bị đẻ ra gấp đôi
+        if (!useAnimationEvent) return;
+
         // Guard: nếu frame này đã spawn rồi thì bỏ qua (chống Animation Event bị duplicate)
         if (isSpawningPea) return;
         isSpawningPea = true;
 
-        GameObject pea = Instantiate(peaPrefab, shootPoint.position, Quaternion.identity);
-        Pea peaScript = pea.GetComponent<Pea>();
-        if (peaScript != null)
-        {
-            peaScript.Init(data.damage);
-        }
+        StartCoroutine(SpawnPeaBurst());
 
-        // Reset flag sau frame này (dùng Invoke thày StartCoroutine để giản dị)
+        // Reset flag sau frame này
         Invoke(nameof(ResetSpawnGuard), 0.05f);
+    }
+
+    IEnumerator SpawnPeaBurst()
+    {
+        for (int i = 0; i < bulletCount; i++)
+        {
+            if (this == null || gameObject == null) yield break;
+
+            if (shootPoint != null && peaPrefab != null)
+            {
+                GameObject pea = Instantiate(peaPrefab, shootPoint.position, Quaternion.identity);
+                Pea peaScript = pea.GetComponent<Pea>();
+                if (peaScript != null)
+                {
+                    peaScript.Init(data.damage);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("PlantAttack: Hãy nhớ kéo ShootPoint và PeaPrefab vào Inspector cho cây này nhé!");
+            }
+
+            if (bulletCount > 1)
+            {
+                // Chờ khoảng giây trước khi tạo viên thứ 2, thứ 3,...
+                yield return new WaitForSeconds(burstDelay);
+            }
+        }
     }
 
     void ResetSpawnGuard() => isSpawningPea = false;

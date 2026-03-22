@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.U2D.Sprites;
 
 public class SpritePivotChanger : EditorWindow
 {
@@ -45,15 +46,28 @@ public class SpritePivotChanger : EditorWindow
                 // Xử lý ảnh xé lẻ (Multiple)
                 if (importer.spriteImportMode == SpriteImportMode.Multiple)
                 {
-                    SpriteMetaData[] spritesheet = importer.spritesheet;
-                    bool changed = false;
-                    for (int i = 0; i < spritesheet.Length; i++)
+                    var factory = new SpriteDataProviderFactories();
+                    factory.Init();
+                    var dataProvider = factory.GetSpriteEditorDataProviderFromObject(obj);
+
+                    if (dataProvider != null)
                     {
-                        spritesheet[i].alignment = (int)SpriteAlignment.Custom;
-                        spritesheet[i].pivot = customPivot;
-                        changed = true;
+                        dataProvider.InitSpriteEditorDataProvider();
+                        var spriteRects = dataProvider.GetSpriteRects();
+                        bool changed = false;
+                        for (int i = 0; i < spriteRects.Length; i++)
+                        {
+                            spriteRects[i].alignment = SpriteAlignment.Custom;
+                            spriteRects[i].pivot = customPivot;
+                            changed = true;
+                        }
+
+                        if (changed)
+                        {
+                            dataProvider.SetSpriteRects(spriteRects);
+                            dataProvider.Apply();
+                        }
                     }
-                    if (changed) importer.spritesheet = spritesheet;
                 }
                 // Xử lý ảnh đơn (Single)
                 else if (importer.spriteImportMode == SpriteImportMode.Single)
