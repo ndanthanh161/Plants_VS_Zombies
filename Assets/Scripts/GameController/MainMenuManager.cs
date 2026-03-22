@@ -21,12 +21,18 @@ public class MainMenuManager : MonoBehaviour
         levelSelectPanel.SetActive(true);
     }
 
+    // Hàm dùng chung để Load bất kỳ Level nào theo tên
+    public void LoadLevel(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
+    }
+
+    // Giữ lại hàm cũ nếu bạn vẫn muốn dùng cho Level 1
     public void PlayLevel1()
     {
         SceneManager.LoadScene("Level_01");
     }
 
-    // Thoát game hẳn (dùng cho bản Build)
     public void QuitGame()
     {
         Debug.Log("Quitting game...");
