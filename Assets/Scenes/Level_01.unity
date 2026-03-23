@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0012457, y: 0.0012712}
-  m_SizeDelta: {x: 163.21, y: 125.6}
+  m_AnchoredPosition: {x: 4.9, y: 0.00054169}
+  m_SizeDelta: {x: 453, y: 444}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &18131755
 CanvasRenderer:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3433962, g: 0.3433962, b: 0.3433962, a: 0.5882353}
+  m_Color: {r: 0.7433963, g: 0.7391884, b: 0.7391884, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01370fb140acbc24d8e28de31ba4b7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SunManager
-  currentSun: 10000
+  currentSun: 500
   sunText: {fileID: 1158856258}
   sunPickupSound: {fileID: 8300000, guid: 4c38ef3359d64094589e106ffcec1881, type: 3}
 --- !u!4 &547302928
@@ -1647,9 +1647,9 @@ MonoBehaviour:
   fireEffectPrefab: {fileID: 689667626583958020, guid: 1336648bc1d8baf46a4515860950c9d4, type: 3}
   effectDuration: 2
   cameraShakeIntensity: 0.1
-  useSlowMotion: 1
+  useSlowMotion: 0
   slowMotionScale: 0.2
-  activationSound: {fileID: 0}
+  activationSound: {fileID: 8300000, guid: 0fd7a160b292529469a39f4dfb447d07, type: 3}
   skillButton: {fileID: 371222663}
   cooldownOverlay: {fileID: 18131756}
   costText: {fileID: 1518561709}

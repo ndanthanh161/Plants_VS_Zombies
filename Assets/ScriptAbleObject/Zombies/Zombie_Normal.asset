@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ZombieData
   moveSpeed: 0.4
   maxHp: 1000
-  damage: 1
-  attackInterval: 4
+  damage: 40
+  attackInterval: 2
   scoreValue: 100
   visualPrefab: {fileID: 992538606757318848, guid: c46d4795c826866409e62dab697fea8b, type: 3}
