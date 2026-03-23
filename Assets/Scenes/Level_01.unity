@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 371222661}
   - component: {fileID: 371222663}
   m_Layer: 5
-  m_Name: AmaterasuButton
+  m_Name: DualBladeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1531,8 +1531,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76d13155a2e29aa4099421327ea2066b, type: 2}
   - {fileID: 11400000, guid: 4f4fe3a1abf55e94ab0112094f772289, type: 2}
   - {fileID: 11400000, guid: 9fece431e64432e458ecd4eb05a89e97, type: 2}
-  - {fileID: 11400000, guid: d228cb66561c76a4c9f67bff17cafe07, type: 2}
-  - {fileID: 11400000, guid: 02f11d6776160814b9e832622f9540a8, type: 2}
   cardParent: {fileID: 1430696003}
   cardPrefab: {fileID: 4040284712739485874, guid: c1852c2cfd4a1ec459b060072f6790c0, type: 3}
   startX: 150
@@ -1624,7 +1622,7 @@ GameObject:
   - component: {fileID: 841265402}
   - component: {fileID: 841265401}
   m_Layer: 0
-  m_Name: AmaterasuSkillManager
+  m_Name: DualBladeSkillManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1642,8 +1640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6c2962eda7d284587e398c2810f492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmaterasuSkill
-  sunCost: 200
-  cooldownTime: 1
+  sunCost: 500
+  cooldownTime: 50
   activationDelay: 1
   damage: 99999
   fireEffectPrefab: {fileID: 689667626583958020, guid: 1336648bc1d8baf46a4515860950c9d4, type: 3}

@@ -15,7 +15,7 @@ MonoBehaviour:
   moveSpeed: 0.4
   maxHp: 4000
   damage: 99999
-  attackInterval: 3.7
+  attackInterval: 2.7
   scoreValue: 500
   visualPrefab: {fileID: 992538606757318848, guid: d605e34af9102ae46928ca8d6a6b1646, type: 3}
   phase2Threshold: 0.5

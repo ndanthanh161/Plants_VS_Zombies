@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 public class Cell : MonoBehaviour, IPointerClickHandler
 {
@@ -10,6 +10,15 @@ public class Cell : MonoBehaviour, IPointerClickHandler
     void Awake()
     {
         manager = FindFirstObjectByType<PlantCardManager>();
+    }
+
+    void Update()
+    {
+        // Khôi phục trạng thái trống nếu cây trên ô đã bị xóa bỏ (bị zombie ăn, Potato Mine nổ, v.v...)
+        if (isOccupied && currentPlant == null)
+        {
+            isOccupied = false;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
