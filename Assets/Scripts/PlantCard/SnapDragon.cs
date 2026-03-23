@@ -44,7 +44,7 @@ public class SnapDragon : MonoBehaviour
     public AudioClip attackSound;
 
     // ─── Private ────────────────────────────────────────
-    private int damage = 30;
+    private int damage = 250;
     private float attackTimer;
     private const float LaneTolerance = 0.5f; // Sai số giảm để không nhận nhầm sang làn khác
 

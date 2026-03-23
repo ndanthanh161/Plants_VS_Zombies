@@ -19,5 +19,5 @@ MonoBehaviour:
   cooldown: 5
   plantPrefab: {fileID: 4460304116807110213, guid: da68ef31372a27741b25c97a0fdb9963, type: 3}
   maxHP: 300
-  damage: 150
+  damage: 100
   attackInterval: 2

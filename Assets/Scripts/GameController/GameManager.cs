@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -50,7 +51,6 @@ public class GameManager : MonoBehaviour
         // Cập nhật UI
         UIManager.Instance.UpdateScore(CurrentScore);
     }
-
     // Khi thua game
     public void GameOver()
     {
@@ -65,8 +65,8 @@ public class GameManager : MonoBehaviour
         if (loseSound != null)
             AudioManager.GetInstance().PlaySound(loseSound);
 
-        // Hiển thị UI thua
-        UIManager.Instance.ShowLose();
+        // Gọi Coroutine để chờ 3 giây rồi mới hiện giao diện thua
+        StartCoroutine(ShowLoseDelayed(3f));
     }
 
     // Khi thắng game
@@ -83,10 +83,29 @@ public class GameManager : MonoBehaviour
         if (winSound != null)
             AudioManager.GetInstance().PlaySound(winSound);
 
-        // Hiển thị UI thắng + truyền điểm
-        UIManager.Instance.ShowWin(CurrentScore);
+        // Gọi Coroutine để chờ 3 giây rồi mới hiện giao diện thắng
+        StartCoroutine(ShowWinDelayed(3f));
     }
 
+    // --- CÁC HÀM COROUTINE XỬ LÝ DELAY ---
+
+    private IEnumerator ShowLoseDelayed(float delayTime)
+    {
+        // Chờ delayTime giây
+        yield return new WaitForSeconds(delayTime);
+
+        // Hiện UI thua (bên trong UIManager.ShowLose() đã có sẵn Time.timeScale = 0f)
+        UIManager.Instance.ShowLose();
+    }
+
+    private IEnumerator ShowWinDelayed(float delayTime)
+    {
+        // Chờ delayTime giây
+        yield return new WaitForSeconds(delayTime);
+
+        // Hiện UI thắng + truyền điểm
+        UIManager.Instance.ShowWin(CurrentScore);
+    }
     // Chơi lại màn hiện tại
     public void Retry()
     {

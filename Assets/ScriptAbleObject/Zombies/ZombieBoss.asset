@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4071b6852596f44b390fe3b1d54cdb, type: 3}
   m_Name: ZombieBoss
   m_EditorClassIdentifier: Assembly-CSharp::ZombieBossData
-  moveSpeed: 0.4
+  moveSpeed: 0.2
   maxHp: 4000
   damage: 99999
   attackInterval: 2.7

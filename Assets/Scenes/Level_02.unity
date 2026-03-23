@@ -1651,7 +1651,7 @@ MonoBehaviour:
   cameraShakeIntensity: 0.1
   useSlowMotion: 1
   slowMotionScale: 0.2
-  activationSound: {fileID: 0}
+  activationSound: {fileID: 8300000, guid: 0fd7a160b292529469a39f4dfb447d07, type: 3}
   skillButton: {fileID: 371222663}
   cooldownOverlay: {fileID: 18131756}
   costText: {fileID: 1518561709}

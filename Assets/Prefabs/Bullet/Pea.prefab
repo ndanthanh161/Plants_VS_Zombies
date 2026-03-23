@@ -174,4 +174,4 @@ MonoBehaviour:
   fireMultiplier: 2
   normalSprite: {fileID: 4054616254958905111, guid: 032fe8d3c66ee0a4aaeef453eab9c80b, type: 3}
   fireSprite: {fileID: 3310002292416464744, guid: 38aa7f3ca597142468f57f5ba2a9161c, type: 3}
-  hitSound: {fileID: 8300000, guid: 01dd0cd793d55f547bc69b0f3cca3b4e, type: 3}
+  hitSound: {fileID: 8300000, guid: 362fae9aecf9a964eb98506880a30247, type: 3}

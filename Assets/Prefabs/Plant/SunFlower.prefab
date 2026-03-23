@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sunflower
   sunPrefab: {fileID: 21108943150320460, guid: eeefe773b9610f04ca46ea29c4592be6, type: 3}
-  produceInterval: 5
+  produceInterval: 7
 --- !u!50 &4933434006912219924
 Rigidbody2D:
   serializedVersion: 5
