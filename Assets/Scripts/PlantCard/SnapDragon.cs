@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// SnapDragon — bắn ra 1 cơn sóng lửa bay xa, gây sát thương xuyên thấu cho mọi zombie trên đường bay.
@@ -30,7 +30,7 @@ public class SnapDragon : MonoBehaviour
     [Header("Hiệu ứng ngọn lửa (Chọn 1 trong 2)")]
     [Tooltip("Cách 1 (Khuyên dùng): Kéo thả PREFAB ngọn lửa (chỉ cần có Sprite hình lửa) vào đây!")]
     public GameObject wavePrefab;
-    
+
     [Tooltip("Cách 2: Gắn GameObject con đã có sẵn trong Snapdragon vào đây.")]
     public GameObject fireEffect;
 
@@ -50,7 +50,7 @@ public class SnapDragon : MonoBehaviour
 
     private Animator anim;
     private static readonly int BiteHash = Animator.StringToHash("Bite");
-    
+
     private bool isAttacking = false;
     private Vector3 initialFireEffectLocalPos;
 
@@ -89,7 +89,7 @@ public class SnapDragon : MonoBehaviour
         if (attackTimer <= 0f)
         {
             TryAttack();
-            ResetTimer(); 
+            ResetTimer();
         }
     }
 
@@ -125,7 +125,7 @@ public class SnapDragon : MonoBehaviour
             if (zombie == null) continue;
 
             float zY = zombie.transform.position.y;
-            if (Mathf.Abs(zY - transform.position.y) <= LaneTolerance) 
+            if (Mathf.Abs(zY - transform.position.y) <= LaneTolerance)
             {
                 float zX = zombie.transform.position.x;
                 float startX = transform.position.x + fireOffsetX;
@@ -163,7 +163,7 @@ public class SnapDragon : MonoBehaviour
         {
             // Cách 1: Spawn một Prefab Lửa ra
             spawnedWave = Instantiate(wavePrefab, startPos, Quaternion.identity);
-            
+
             // Xếp lớp để nó luôn nằm đè lên cây
             SpriteRenderer srWave = spawnedWave.GetComponentInChildren<SpriteRenderer>();
             SpriteRenderer srPlant = GetComponent<SpriteRenderer>();
@@ -185,15 +185,15 @@ public class SnapDragon : MonoBehaviour
         }
 
         float elapsed = 0f;
-        
+
         while (elapsed < waveDuration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / waveDuration;
-            
+
             // Cập nhật vị trí sóng bay tới
             Vector3 currentPos = startPos + new Vector3(waveDistance * t, 0, 0);
-            
+
             // Trượt con sóng trên màn hình
             if (spawnedWave != null)
             {
@@ -222,7 +222,7 @@ public class SnapDragon : MonoBehaviour
                 }
             }
 
-            yield return null; 
+            yield return null;
         }
 
         // Hủy hoặc ẩn lửa khi bay xong
@@ -243,7 +243,7 @@ public class SnapDragon : MonoBehaviour
     {
         Vector3 startPoint = new Vector3(transform.position.x + fireOffsetX, transform.position.y, 0f);
         Vector3 endPoint = startPoint + new Vector3(waveDistance, 0, 0);
-        
+
         Gizmos.color = new Color(1f, 0.4f, 0f, 0.35f);
         Gizmos.DrawLine(startPoint, endPoint);
         Gizmos.DrawWireCube(startPoint, new Vector3(waveWidth, waveHeight, 0.1f));

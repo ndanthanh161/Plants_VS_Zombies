@@ -3723,7 +3723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SunSpawner
   sunPrefab: {fileID: 21108943150320460, guid: eeefe773b9610f04ca46ea29c4592be6, type: 3}
-  spawnInterval: 12
+  spawnInterval: 10
   spawnY: 6
   groundY: 2
   minX: -4

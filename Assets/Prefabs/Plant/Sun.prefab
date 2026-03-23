@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sun
   value: 25
-  lifeTime: 10
+  lifeTime: 7
   fallSpeed: 2
